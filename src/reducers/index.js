@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as reducerForm } from 'redux-form';
 
-import shopsReducer from './shops_reducer';
+import companyReducer from './companyReducer';
 
 
 const rootReducer = combineReducers({
   form: reducerForm,
-  shops: shopsReducer,
+  companies: companyReducer,
 });
 
 export default rootReducer;

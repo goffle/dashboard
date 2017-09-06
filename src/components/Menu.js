@@ -38,15 +38,8 @@ class Menu extends Component {
                             </div>
                         </span>
                     </Subheader>
-                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Add Shop" containerElement={<Link to="/shop" />} />
-                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Add Product" containerElement={<Link to="/product" />} />
-                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Add Customer" containerElement={<Link to="/customer" />} />
-                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Add Bid" containerElement={<Link to="/bid" />} />
-
-                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Watch Data" containerElement={<Link to="/data" />} />
-
-                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Stats" /*containerElement={/*<Link to="/portfolio/map" />} */ />
-
+                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Home" containerElement={<Link to="/home" />} />
+                    <MenuItem leftIcon={<DirectoryIcon />} primaryText="Other" containerElement={<Link to="/product" />} />
                 </Drawer>
             </header>
         )

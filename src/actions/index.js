@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
-export const POST_SHOP = 'POST_SHOP';
-export const FETCH_SHOPS = 'FETCH_SHOPS';
+export const POST_COMPANY = 'POST_COMPANY';
+export const FETCH_COMPANIES = 'FETCH_COMPANIES';
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,19 +13,19 @@ const config = {
 };
 firebase.initializeApp(config);
 
-export function postShop(props) {
-  const newPostRef = firebase.database().ref().child('shops').push();
-  newPostRef.set(props);
+export function postCompany(company) {
+  const newPostRef = firebase.database().ref().child('companies').push();
+  newPostRef.set(company);
   return {
-    type: POST_SHOP,
+    type: POST_COMPANY,
     payload: newPostRef,
   };
 }
 
-export function fetchShops() {
-  const request = firebase.database().ref('/shops/').once('value');
+export function fetchCompanies() {
+  const request = firebase.database().ref('/companies/').once('value');
   return {
-    type: FETCH_SHOPS,
+    type: FETCH_COMPANIES,
     payload: request,
   };
 }
