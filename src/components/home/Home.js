@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
+import Dialog from 'material-ui/Dialog';
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
-import { fetchCompanies } from '../actions/index';
+import { fetchCompanies } from '../../actions/index';
 
 //http://www.material-ui.com/#/components/raised-button
 //https://docs.google.com/presentation/d/1Pf_JHGNQZdYRmI2-0Ml-X1qKB8hvCtubv0uwK7S2O9Q/edit#slide=id.g252963e52a_0_3
 //https://bitbucket.org/business-directory/all/src/11f89ad14f42de5727cfd6aa1a893237f787893c/dashboard/src/containers/Directory.js?at=master&fileviewer=file-view-default
+//http://www.material-ui.com/#/components/dialog
 
 class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { lastUpdate: '' };
+    this.state = { open: false };
   }
 
   componentWillMount() {
@@ -56,10 +58,21 @@ class Home extends Component {
     );
   }
 
+  renderDialog() {
+    return (
+      <Dialog
+        title="Dialog With Actions"
+        modal={false}
+        open={this.state.open}
+        onRequestClose={this.handleClose}
+      />);
+  }
+
   render() {
     return (
       <div style={styles.container}>
         <RaisedButton label="Add a new company" primary href="/company" />
+        {this.renderDialog()}
         <br /><br />
         {this.renderList()}
       </div>

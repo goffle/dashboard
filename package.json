@@ -2,7 +2,7 @@
   "name": "dashboard",
   "version": "0.1.0",
   "private": true,
-  "eslintIgnore": ["AddShop.js"],
+  "eslintIgnore": [],
   "dependencies": {
     "firebase": "^4.3.0",
     "material-ui": "^0.19.1",

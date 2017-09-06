@@ -5,8 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import Menu from './Menu';
-import Company from './Company';
-import Home from './Home';
+import Company from './company/Company';
+import Home from './home/Home';
 
 
 injectTapEventPlugin();

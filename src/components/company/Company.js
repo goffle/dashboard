@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { postCompany } from '../actions/index';
+import { postCompany } from '../../actions/index';
 
 class AddCompany extends Component {
 
