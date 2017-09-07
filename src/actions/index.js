@@ -25,20 +25,25 @@ export function postArticles(company) {
   };
 }
 
+export function postCompany(company) {
+  let newPostRef;
+  if (!company.key) {
+    newPostRef = firebase.database().ref().child('companies').push();
+  } else {
+    newPostRef = firebase.database().ref().child(`companies/${company.key}`);
+  }
+  newPostRef.set(company);
+  return {
+    type: POST_COMPANY,
+    payload: newPostRef,
+  };
+}
+
 export function fetchArticles() {
   const request = firebase.database().ref('/articles/').once('value');
   return {
     type: FETCH_ARTICLES,
     payload: request,
-  };
-}
-
-export function postCompany(company) {
-  const newPostRef = firebase.database().ref().child('companies').push();
-  newPostRef.set(company);
-  return {
-    type: POST_COMPANY,
-    payload: newPostRef,
   };
 }
 

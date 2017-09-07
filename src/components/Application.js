@@ -35,7 +35,7 @@ const styles = {
   container: {
     left: '250px',
     position: 'absolute',
-    width: '100%',
+    width: '1600px',
     height: '100%',
   },
 };
