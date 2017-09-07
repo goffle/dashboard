@@ -5,13 +5,9 @@ import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { postCompany } from '../../actions/index';
+import { fetchCompany } from '../../actions/index';
 
 class AddCompany extends Component {
-
-  componentWillMount() {
-    console.log(this.props.match.params.id);
-  }
 
   onSubmit({ name, description, website, crunchbase }) {
     const obj = {
@@ -29,7 +25,7 @@ class AddCompany extends Component {
       <form className="container" onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
         <div className="div">
           <h3>Add a new shop</h3>
-          <Field label="Name" name="name" component={renderNameTextField} type="text" />
+          <Field label="Name" name="name" defaultValue='heyheyh' component={renderNameTextField} type="text" />
           <Field label="Description" name="description" component={renderNameTextField} type="text" />
           <Field label="Website" name="website" component={renderNameTextField} type="text" />
           <Field label="Crunchbase" name="crunchbase" component={renderNameTextField} type="text" />
@@ -66,7 +62,12 @@ const validate = (values) => {
   return errors;
 };
 
-export default connect(null, { postCompany })(
+const mapStateToProps = ({ companies }, props) => {
+  debugger;
+  return { company: companies[props.match.params.id] }
+};
+
+export default connect(mapStateToProps, null)(
   reduxForm({
     form: 'AddCompanyForm',
     validate,

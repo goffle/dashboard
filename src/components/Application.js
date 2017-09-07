@@ -8,7 +8,6 @@ import Menu from './Menu';
 import Company from './company/Company';
 import Home from './home/Home';
 
-
 injectTapEventPlugin();
 
 const Application = () => {
@@ -20,6 +19,7 @@ const Application = () => {
           <div style={styles.container}>
             <Switch>
               <Route path="/company/:id" component={Company} />
+              <Route path="/company" component={Company} />
               <Route path="/" component={Home} />
             </Switch>
           </div>

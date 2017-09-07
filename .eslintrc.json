@@ -1,6 +1,12 @@
 {
   "extends": "airbnb",
   "rules": {
-    "func-names": ["error", "never"]
+    "func-names": [
+      "error",
+      "never"
+    ],
+    "react/jsx-filename-extension": "off",
+    "no-use-before-define": "off",
+    "react/prop-types": "off"
   }
 }
