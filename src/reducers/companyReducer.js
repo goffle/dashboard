@@ -1,9 +1,9 @@
-import { FETCH_COMPANIES } from '../actions';
+import { FETCH_COMPANY } from '../actions';
 
-export default function (state = [], action) {
+export default function (state = {}, action) {
   switch (action.type) {
-    case FETCH_COMPANIES:
-      return { ...state, ...action.payload.val() };
+    case FETCH_COMPANY:
+      return action.payload.val();
     default:
       return state;
   }

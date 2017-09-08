@@ -6,29 +6,24 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-import { postCompany } from '../../actions/index';
+import { postCompany, fetchCompany } from '../../actions/index';
 
 class AddCompany extends Component {
-  state = {
-    initialValues: {},
-    relation: ''
+  componentWillMount() {
+    this.props.fetchCompany(this.props.match.params.id);
   }
 
-  handleRelationChange = (event, index, value) => {
-    this.setState({ relation: value })
-  };
-
-  onSubmit(params) {
+  onSubmit() {
     const obj = {
-      key: params.key,
-      name: params.name,
-      description: params.description,
-      website: params.website,
-      crunchbase: params.crunchbase | '',
-      twitter: params.twitter | '',
-      relation: this.state.relation | '',
+      key: this.props.company.key,
+      name: this.state.name,
+      description: this.state.description,
+      website: this.state.website,
+      crunchbase: this.state.crunchbase,
+      twitter: this.state.twitter,
+      relation: this.state.relation,
     };
-    this.props.postCompany(obj);
+    //this.props.postCompany(obj);
     this.props.history.push('/');
   }
 
@@ -38,7 +33,7 @@ class AddCompany extends Component {
         <Timeline
           dataSource={{
             sourceType: 'profile',
-            screenName: this.props.initialValues.twitter
+            screenName: this.props.initialValues.twitter,
           }}
           options={{
             username: 'TwitterDev',
@@ -50,8 +45,8 @@ class AddCompany extends Component {
       );
     }
     return;
-
   }
+
   render() {
     return (
       <div className="container">
@@ -61,9 +56,8 @@ class AddCompany extends Component {
           <TextField hintText="Website" defaultValue={this.props.company.website} onChange={(event, value) => { this.setState({ website: value }) }} />
           <TextField hintText="Twitter" defaultValue={this.props.company.twitter} onChange={(event, value) => { this.setState({ twitter: value }) }} />
           <TextField hintText="Crunchbase" defaultValue={this.props.company.crunchbase} onChange={(event, value) => { this.setState({ crunchbase: value }) }} />
-          {this.state.name}
           <div>
-            <RaisedButton type="submit" className="btn" primary label="Save" />
+            <RaisedButton type="submit" className="btn" primary label="Save" onClick={this.onSubmit.bind(this)} />
             <RaisedButton type="submit" className="btn" secondary label="Cancel" href="/home" />
           </div>
         </div>
@@ -87,8 +81,9 @@ class AddCompany extends Component {
           {this.renderTwitter()}
           */
 
-const mapStateToProps = ({ companies }, props) => {
-  return { company: companies[props.match.params.id] }
+
+const mapStateToProps = ({ currentCompany }) => {
+  return { company: currentCompany };
 };
 
-export default connect(mapStateToProps, { postCompany })(AddCompany);
+export default connect(mapStateToProps, { postCompany, fetchCompany })(AddCompany);

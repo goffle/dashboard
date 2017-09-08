@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux';
-import { reducer as reducerForm } from 'redux-form';
 
+import companiesReducer from './companiesReducer';
 import companyReducer from './companyReducer';
 
-
 const rootReducer = combineReducers({
-  form: reducerForm,
-  companies: companyReducer,
+  companies: companiesReducer,
+  currentCompany: companyReducer,
 });
 
 export default rootReducer;
