@@ -6,7 +6,6 @@ import CircularProgress from 'material-ui/CircularProgress';
 import { fetchCompanies } from '../../actions/index';
 
 class CompanyGrid extends Component {
-
   componentWillMount() {
     this.props.fetchCompanies();
   }
@@ -20,7 +19,7 @@ class CompanyGrid extends Component {
         <Card >
           <CardTitle title={company.name} subtitle={company.website} />
           <CardMedia >
-            <img src="https://unsplash.it/200/100" />
+            <img src="https://unsplash.it/200/100" alt="logo" />
           </CardMedia>
           <CardText>
             {company.description}
@@ -43,7 +42,7 @@ class CompanyGrid extends Component {
       companyRow.forEach((company) => {
         cells.push(this.createCard(company));
       });
-      raws.push(<div key={rowIndex++} className="row">{cells}</div>)
+      raws.push(<div key={rowIndex++} className="row">{cells}</div>);
     });
     return raws;
   }

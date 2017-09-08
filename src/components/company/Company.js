@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import { Timeline } from 'react-twitter-widgets'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,7 +20,7 @@ class AddCompany extends Component {
 
   onSubmit(params) {
     const obj = {
-      key : params.key,
+      key: params.key,
       name: params.name,
       description: params.description,
       website: params.website,
@@ -32,6 +31,7 @@ class AddCompany extends Component {
     this.props.postCompany(obj);
     this.props.history.push('/');
   }
+
   renderTwitter() {
     if (this.props.initialValues && this.props.initialValues.twitter) {
       return (
@@ -54,23 +54,24 @@ class AddCompany extends Component {
   }
   render() {
     return (
-      <form className="container" onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+      <div className="container">
         <div className="div">
-          <h3>Add a new shop</h3>
-          <div class="row">
-            <div class="col-4">
-              <Field label="Name" name="name" component={renderNameTextField} type="text" />
-            </div>
-            <div class="col-4">
-              <Field label="Description" name="description" component={renderNameTextField} rows={3} type="text" />
-            </div>
-            <div class="col-4">
-              <Field label="Website" name="website" component={renderNameTextField} type="text" />
-            </div>
+          <TextField hintText="Name" defaultValue={this.props.company.name} onChange={(event, value) => { this.setState({ name: value }) }} />
+          <TextField hintText="Description" rows={3} defaultValue={this.props.company.description} onChange={(event, value) => { this.setState({ description: value }) }} />
+          <TextField hintText="Website" defaultValue={this.props.company.website} onChange={(event, value) => { this.setState({ website: value }) }} />
+          <TextField hintText="Twitter" defaultValue={this.props.company.twitter} onChange={(event, value) => { this.setState({ twitter: value }) }} />
+          <TextField hintText="Crunchbase" defaultValue={this.props.company.crunchbase} onChange={(event, value) => { this.setState({ crunchbase: value }) }} />
+          {this.state.name}
+          <div>
+            <RaisedButton type="submit" className="btn" primary label="Save" />
+            <RaisedButton type="submit" className="btn" secondary label="Cancel" href="/home" />
           </div>
-          <Field label="Twitter" name="twitter" component={renderNameTextField} type="text" />
-          <Field label="Crunchbase" name="crunchbase" component={renderNameTextField} type="text" />
-          <SelectField
+        </div>
+      </div>
+    );
+  }
+}
+/*   <SelectField
             floatingLabelText="Relation"
             value={this.state.relation}
             onChange={this.handleRelationChange}
@@ -79,53 +80,15 @@ class AddCompany extends Component {
             <MenuItem value={2} primaryText="Competitor" />
             <MenuItem value={3} primaryText="Other" />
           </SelectField>
-
-
           <div>
-            <Field label="Features" name="feature" component={renderNameTextField} type="text" />
+            <TextField label="Features" name="feature" type="text" />
             <RaisedButton className="btn" primary label="Add" />
           </div>
           {this.renderTwitter()}
-          <br /><br /><br />
-
-          <div>
-            <RaisedButton type="submit" className="btn" primary label="Save" />
-            <RaisedButton type="submit" className="btn" secondary label="Cancel" href="/home" />
-          </div>
-        </div>
-      </form>
-    );
-  }
-}
-
-const renderNameTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-  <TextField
-    hintText={label}
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    {...custom}
-    fullWidth
-  />
-);
-
-const validate = (values) => {
-  const errors = {};
-  const fields = ['name', 'description', 'website'];
-  fields.forEach((field) => {
-    if (values[field] === undefined) {
-      errors[field] = 'Required';
-    }
-  });
-  return errors;
-};
+          */
 
 const mapStateToProps = ({ companies }, props) => {
-  return { initialValues: companies[props.match.params.id] }
+  return { company: companies[props.match.params.id] }
 };
 
-export default connect(mapStateToProps, { postCompany })(
-  reduxForm({
-    form: 'AddCompanyForm',
-    validate,
-  })(AddCompany));
+export default connect(mapStateToProps, { postCompany })(AddCompany);
