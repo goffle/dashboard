@@ -15,7 +15,9 @@
     "react-twitter-widgets": "^1.5.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "semantic-ui": "^2.2.13",
+    "semantic-ui-react": "^0.72.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { RaisedButton } from 'material-ui';
-import Dialog from 'material-ui/Dialog';
 import CompanyGrid from './CompanyGrid';
 
 //http://www.material-ui.com/#/components/raised-button
@@ -14,29 +12,21 @@ class Home extends Component {
     this.state = { open: false };
   }
 
-  renderDialog() {
-    return (
-      <Dialog
-        title="Dialog With Actions"
-        modal={false}
-        open={this.state.open}
-        onRequestClose={this.handleClose}
-      />);
-  }
-
   render() {
     return (
       <div style={styles.container}>
-        <RaisedButton style={styles.button} label="Add a new company" primary href="/company" />
-        <RaisedButton style={styles.button} label="Add a new article" primary href="/company" />
-        {this.renderDialog()}
-        <br /><br />
-        <CompanyGrid history={this.props.history} />
+
       </div>
     );
   }
 }
 
+/*
+        <RaisedButton style={styles.button} label="Add a new company" primary href="/company" />
+        <RaisedButton style={styles.button} label="Add a new article" primary href="/company" />
+        {this.renderDialog()}
+        <br /><br />
+        <CompanyGrid history={this.props.history} />*/
 
 export default Home;
 
@@ -45,6 +35,7 @@ const styles = {
     width: '100%',
     height: '100%',
     margin: '5%',
+    backgroundColor: '#f00'
   },
   button: {
     margin: 20,

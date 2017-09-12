@@ -1,56 +1,21 @@
 import React, { Component } from 'react';
-import Drawer from 'material-ui/Drawer';
-import Subheader from 'material-ui/Subheader';
-import MenuItem from 'material-ui/MenuItem';
-
-import DirectoryIcon from 'material-ui/svg-icons/action/view-module';
-
 import { BrowserRouter as Router, Route, Link, IndexLink } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react'
 
-
-//I need to check css good practices
-
-class Menu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { drawerOpen: true };
-  }
+export default class LeftMenu extends Component {
+  state = { activeItem: 'home' }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
+    const { activeItem } = this.state
     return (
-      <header className="header">
-        <Drawer containerClassName="drawer"
-          docked
-          width={200}
-          open={this.state.drawerOpen}
-        >
-          <Subheader inset={false}>
-            <span style={{ width: '100%' }}><div >DASHBOARD</div>
-              <div
-                style={{ display: 'inline-block' }}
-              >
-                <i className="fa fa-long-arrow-left fa-lg" style={{ color: '#4498c0' }} aria-hidden />
-              </div>
-            </span>
-          </Subheader>
-          <MenuItem
-            leftIcon={<DirectoryIcon />}
-            primaryText="Home"
-            containerElement={<Link to="/home" />}
-          />
-          <MenuItem
-            leftIcon={<DirectoryIcon />}
-            primaryText="Other"
-            containerElement={<Link to="/product" />}
-          />
-        </Drawer>
-      </header>
+      <div>
+        <Menu inverted vertical>
+          <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+          <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick} />
+          <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick} />
+        </Menu>
+      </div>
     );
   }
 }
-
-Menu.childContextTypes = {
-  muiTheme: React.PropTypes.object.isRequired,
-};
-
-export default Menu;

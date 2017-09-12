@@ -1,33 +1,32 @@
 import React from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-import Menu from './Menu';
+import LeftMenu from './Menu';
 import Company from './company/Company';
 import Home from './home/Home';
+import 'semantic-ui-css/semantic.min.css';
 
 injectTapEventPlugin();
 
 const Application = () => {
   return (
-    <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <BrowserRouter>
-        <div>
-          <Menu />
-          <div style={styles.container}>
-            <Switch>
-              <Route path="/company/:id" component={Company} />
-              <Route path="/company" component={Company} />
-              <Route path="/" component={Home} />
-            </Switch>
-          </div>
+    <BrowserRouter>
+      <div>
+        <LeftMenu />
+        <div style={styles.container}>
+          <Switch>
+            <Route path="/" component={Home} />
+          </Switch>
         </div>
-      </BrowserRouter>
-    </MuiThemeProvider >
+      </div>
+    </BrowserRouter>
   );
 };
+
+/*
+            <Route path="/company/:id" component={Company} />
+            <Route path="/company" component={Company} />
+            */
 
 export default Application;
 
