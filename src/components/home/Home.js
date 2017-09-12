@@ -27,10 +27,15 @@ class Home extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <RaisedButton style={styles.button} label="Add a new company" primary href="/company" />
-        <RaisedButton style={styles.button} label="Add a new article" primary href="/company" />
-        {this.renderDialog()}
-        <br /><br />
+        <div>
+          <RaisedButton style={styles.button} label="Add a new company" primary href="/company" />
+          <RaisedButton style={styles.button} label="Add a new article" primary href="/company" />
+        </div>
+        <div>
+          <RaisedButton style={styles.button} label="Partner" primary />
+          <RaisedButton style={styles.button} label="Competitor" primary />
+          <RaisedButton style={styles.button} label="Other" primary />
+        </div>
         <CompanyGrid history={this.props.history} />
       </div>
     );

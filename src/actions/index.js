@@ -26,16 +26,15 @@ export function postArticles(company) {
 }
 
 export function postCompany(company) {
-  let newPostRef;
   if (!company.key) {
-    newPostRef = firebase.database().ref().child('companies').push();
+    const newPostRef = firebase.database().ref().child('companies').push();
+    newPostRef.set(company);
   } else {
-    newPostRef = firebase.database().ref().child(`companies/${company.key}`);
+    const newPostRef = firebase.database().ref().child(`companies/${company.key}`);
+    newPostRef.update(company);
   }
-  newPostRef.set(company);
   return {
     type: POST_COMPANY,
-    payload: newPostRef,
   };
 }
 

@@ -33,9 +33,10 @@ export default Application;
 
 const styles = {
   container: {
-    left: '250px',
+    left: '200px',
     position: 'absolute',
-    width: '1600px',
+    width: '1700px',
     height: '100%',
+    backgroundColor:'#252C3A'
   },
 };

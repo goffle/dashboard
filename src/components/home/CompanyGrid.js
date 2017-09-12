@@ -16,13 +16,14 @@ class CompanyGrid extends Component {
   createCard(company) {
     return (
       <div key={company.key} className="col-md-2" style={{ marginBottom: '32px', cursor: 'pointer' }} onClick={() => this.selectCompany(company.key)} >
-        <Card >
+        <Card style={{ height: 300 }}>
+
           <CardTitle title={company.name} subtitle={company.website} />
           <CardMedia >
             <img src="https://unsplash.it/200/100" alt="logo" />
           </CardMedia>
           <CardText>
-            {company.description}
+            {/*company.description*/}
           </CardText>
         </Card>
       </div >
@@ -68,9 +69,7 @@ export default connect(mapStateToProps, { fetchCompanies })(CompanyGrid);
 
 const styles = {
   container: {
-    width: '100%',
-    height: '100%',
-    margin: '5%',
+    width: '90%',
   },
   button: {
     margin: 20,

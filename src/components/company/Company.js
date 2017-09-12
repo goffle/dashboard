@@ -9,21 +9,16 @@ import MenuItem from 'material-ui/MenuItem';
 import { postCompany, fetchCompany } from '../../actions/index';
 
 class AddCompany extends Component {
+  state = {
+    relation: 3,
+  };
+
   componentWillMount() {
     this.props.fetchCompany(this.props.match.params.id);
   }
 
   onSubmit() {
-    const obj = {
-      key: this.props.company.key,
-      name: this.state.name,
-      description: this.state.description,
-      website: this.state.website,
-      crunchbase: this.state.crunchbase,
-      twitter: this.state.twitter,
-      relation: this.state.relation,
-    };
-    //this.props.postCompany(obj);
+    this.props.postCompany(Object.assign(this.state, { key: this.props.company.key }));
     this.props.history.push('/');
   }
 
@@ -48,42 +43,56 @@ class AddCompany extends Component {
   }
 
   render() {
+    if (!this.props.company) {
+      return (<div />);
+    }
     return (
-      <div className="container">
-        <div className="div">
-          <TextField hintText="Name" defaultValue={this.props.company.name} onChange={(event, value) => { this.setState({ name: value }) }} />
-          <TextField hintText="Description" rows={3} defaultValue={this.props.company.description} onChange={(event, value) => { this.setState({ description: value }) }} />
-          <TextField hintText="Website" defaultValue={this.props.company.website} onChange={(event, value) => { this.setState({ website: value }) }} />
-          <TextField hintText="Twitter" defaultValue={this.props.company.twitter} onChange={(event, value) => { this.setState({ twitter: value }) }} />
-          <TextField hintText="Crunchbase" defaultValue={this.props.company.crunchbase} onChange={(event, value) => { this.setState({ crunchbase: value }) }} />
-          <div>
-            <RaisedButton type="submit" className="btn" primary label="Save" onClick={this.onSubmit.bind(this)} />
-            <RaisedButton type="submit" className="btn" secondary label="Cancel" href="/home" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-/*   <SelectField
-            floatingLabelText="Relation"
+      <div className="container" style={{ marginTop: 40 }} >
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', margin: 40 }}>
+          <TextField underlineShow={false} style={{ margin: 20 }} inputStyle={styles.fieldStyle} hintText="Name" defaultValue={this.props.company.name} onChange={(event, value) => { this.setState({ name: value }) }} />
+          <TextField underlineShow={false} style={{ margin: 20 }} inputStyle={styles.fieldStyle} hintText="Website" defaultValue={this.props.company.website} onChange={(event, value) => { this.setState({ website: value }) }} />
+          <SelectField
             value={this.state.relation}
-            onChange={this.handleRelationChange}
+            onChange={(event, index, value) => { this.setState({ relation: value }); }}
+            inputStyle={styles.fieldStyle}
+            underlineShow={false}
           >
             <MenuItem value={1} primaryText="Partner" />
             <MenuItem value={2} primaryText="Competitor" />
             <MenuItem value={3} primaryText="Other" />
           </SelectField>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', margin: 40 }}>
+          <TextField underlineShow={false} style={{ margin: 20 }} inputStyle={styles.fieldStyle} hintText="Description" fullWidth rows={3} defaultValue={this.props.company.description} onChange={(event, value) => { this.setState({ description: value }) }} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', margin: 40 }}>
+          <TextField underlineShow={false} style={{ margin: 20 }} inputStyle={styles.fieldStyle} hintText="Twitter" defaultValue={this.props.company.twitter} onChange={(event, value) => { this.setState({ twitter: value }) }} />
+          <TextField underlineShow={false} style={{ margin: 20 }} inputStyle={styles.fieldStyle} hintText="Crunchbase" defaultValue={this.props.company.crunchbase} onChange={(event, value) => { this.setState({ crunchbase: value }) }} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', margin: 60 }}>
+          <RaisedButton type="submit" style={{ margin: 20 }} className="btn" primary label="Save" onClick={this.onSubmit.bind(this)} />
+          <RaisedButton type="submit" style={{ margin: 20 }} className="btn" secondary label="Cancel" href="/home" />
+        </div>
+      </div>
+    );
+  }
+}
+/*   
           <div>
             <TextField label="Features" name="feature" type="text" />
             <RaisedButton className="btn" primary label="Add" />
           </div>
           {this.renderTwitter()}
-          */
+*/
 
 
 const mapStateToProps = ({ currentCompany }) => {
   return { company: currentCompany };
 };
 
+const styles = {
+  fieldStyle: {
+    backgroundColor: '#fff',
+  }
+}
 export default connect(mapStateToProps, { postCompany, fetchCompany })(AddCompany);
